@@ -1,0 +1,30 @@
+<html>
+<link rel=stylesheet href="../css/style_page1.css">
+<div id="eintrag">
+		<h2>Eintrag erstellen</h2>
+		<span class="error"></span>
+		<div>
+			<form action="insert.php" method="post">
+				<table>
+					<tr>
+						<td><h4>Name:</h4></td>
+						<td><input class="text" type="text" value="" maxlength="50" size="30" name="New_Name" /></td>
+					</tr>
+					<tr>
+						<td><h4>e-Mail:</h4></td>
+						<td><input class="text" type="text" value="" maxlength="50" size="30" name="New_eMail" /></td>
+					</tr>
+					<tr>
+						<td><h4>Eintrag:</h4></td>
+						<td><textarea name="Eintrag" rows="30" cols="30" maxlength="150"></textarea></td>
+					</tr>
+					<tr>
+						<td><h4>Aktion:</h4></td>
+						<td><input class="submit" type="submit" name="Eintragen-disabled" value="Eintragen" disabled />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+ </div>
+</html>
