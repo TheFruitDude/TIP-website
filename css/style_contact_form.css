@@ -11,6 +11,7 @@
 	-o-font-smoothing:antialiased;
 	text-rendering:optimizeLegibility;
 }
+
 html { 
   background: url("../img/free_soloing.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
