@@ -1,0 +1,198 @@
+.tc-notes-wrapper .new-note-btn {
+  width: 200px;
+  display: block;
+  margin: 0 auto 20px;
+  background-color: #FFF;
+  padding: 10px 32px;
+  border: 1px solid #e0e0e0;
+  font-size: 26px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+}
+
+.tc-notes-wrapper .new-note-btn:hover {
+  -webkit-box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+}
+
+.tc-notes-wrapper .new-note-btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.tc-notes-wrapper .tc-notes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note {
+  background-color: #f0c806;
+  border-radius: 8px;
+  width: 280px;
+  margin: 0 10px 20px;
+  -webkit-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header {
+  padding: 10px 16px 0;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  line-height: 24px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close:focus {
+  -webkit-box-shadow: inset 2px 3px 0px rgba(0, 0, 0, 0.8);
+          box-shadow: inset 2px 3px 0px rgba(0, 0, 0, 0.8);
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close {
+  float: right;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-title,
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-body {
+  outline: 0;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-title {
+  font-size: 24px;
+  padding: 10px 16px;
+  font-weight: bold;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-body {
+  font-size: 20px;
+  padding: 10px 16px 16px;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note:hover {
+  -webkit-box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.tc-notes-wrapper .new-note-btn {
+  width: 200px;
+  display: block;
+  margin: 0 auto 20px;
+  background-color: #FFF;
+  padding: 10px 32px;
+  border: 1px solid #e0e0e0;
+  font-size: 26px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+}
+
+.tc-notes-wrapper .new-note-btn:hover {
+  -webkit-box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+}
+
+.tc-notes-wrapper .new-note-btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.tc-notes-wrapper .tc-notes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note {
+  background-color: #f0c806;
+  border-radius: 8px;
+  width: 280px;
+  margin: 0 10px 20px;
+  -webkit-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+  font-family: 'Caveat', cursive;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header {
+  padding: 10px 16px 0;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  line-height: 24px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close:focus {
+  -webkit-box-shadow: inset 2px 3px 0px rgba(0, 0, 0, 0.8);
+          box-shadow: inset 2px 3px 0px rgba(0, 0, 0, 0.8);
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-header .tc-note-close {
+  float: right;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-title,
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-body {
+  outline: 0;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-title {
+  font-size: 24px;
+  padding: 10px 16px;
+  font-weight: bold;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note .tc-note-body {
+  font-size: 20px;
+  padding: 10px 16px 16px;
+}
+
+.tc-notes-wrapper .tc-notes .tc-note:hover {
+  -webkit-box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+}
+/*# sourceMappingURL=notepad.css.map */

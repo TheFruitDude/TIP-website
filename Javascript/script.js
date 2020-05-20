@@ -1,4 +1,4 @@
-var b = new ball(40, 40) //the red ball
+var b
 var re; //the brick we move with mouse
 
 let cnv;
@@ -12,6 +12,7 @@ let rect_heigth = 25
 var anzahl_rect = 70
 
 function setup() {
+  b  = new ball(40, 40) //the red ball
   re = new rectangle(color('white')) 
 
   var h = document.getElementById("bo")
@@ -40,8 +41,6 @@ const colorArr = [
     var r = new rectangle(randomColor)
     arr.push(r)
   }
-
-  
 }
 
 function moveRect() {
@@ -70,14 +69,17 @@ function draw_bricks(w) {
 }
 var x = 400; //starting point for the ball
 var y = 300;
-var z = 1 // is alwyays either 1 or -1
-function draw() {
+var z = 1 // is alwyays either 1 or -1 this number indicates the direction of the ball
+
+function draw() { 
   
   background(10);
   if (intersects(b, re)) {
     z = z * (-1)
   } 
-
+  if (touchesWall(b)) {
+    z = z * (-1)
+  }
   
   draw_bricks(wWidth)     
   moveRect() //rectangle follows the mouse
@@ -88,7 +90,7 @@ function draw() {
 }
 function intersects(ball, rectangle) {
 
-  for (let i = rectangle.x; i < rectangle.x + rectangle.w; i++) {
+  for (let i = rectangle.x; i < rectangle.x + rectangle.w; i++) { //check each point across the X of Rectangle
     var d = dist(ball.x, ball.y, i, rectangle.y)
 
     if (d < ball.radius) {
@@ -99,20 +101,20 @@ function intersects(ball, rectangle) {
   }
   return false
 }
-
-function ball(width, height) {
-  this.width = width;
-  this.height = height;
-  this.radius = height/2;
-  this.x;
-  this.y,
-
-  this.draw = function(x, y) {
-    this.x = x;
-    this.y = y;
-    var c = color('red')
-    fill(c)
-    noStroke()
-    ellipse(x, y, this.width, this.height);
+function touchesWall(ball) {
+  
+  if (ball.x - ball.radius == 0) {
+    // linke Wall
+    return true
   }
+  if (ball.x + ball.radius == wWidth) {
+    //rechte Wall
+    return true
+  }
+  if (ball.y - ball.radius == 0) {
+    //oben
+    return true
+  }
+  return false
 }
+
