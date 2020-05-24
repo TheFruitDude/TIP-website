@@ -1,10 +1,8 @@
-
-
 <?php
-/** Copyright 2012 Hochschule Luzern - Technik & Architektur 
+/** Copyright 2018 Hochschule Luzern - Informatik
  *
  * Provides access to the TIP guestbook table in the MySQL database.
- * Supports listing of all guestbok items, inserting new items and removing 
+ * Supports listing of all guestbook items, inserting new items and removing 
  * an exiting item.    
  * @author Peter Sollberger <peter.sollberger@hslu.ch>
  */
@@ -22,10 +20,13 @@ class GuestbookAccess
         $database = "mydb";
         
         // Open the database
-        $this->db = new mysqli("localhost", $username, $password, $database);        
+        $this->db = mysqli_connect("localhost", $username, $password);        
         if ($this->db == false) {
             die("Unable to connect to database");
         }
+        
+        // Select database
+        mysqli_select_db($this->db, $database);
     }
     
     /**
@@ -33,7 +34,7 @@ class GuestbookAccess
      */
     public function __destruct()
     {
-        $this->db->close();
+        mysqli_close($this->db);
     }
     
     /**
@@ -43,31 +44,26 @@ class GuestbookAccess
      *         table[...]["Name"]    --> String: name of the user
      *         table[...]["eMail"]   --> String: e-Mail of the user
      *         table[...]["Comment"] --> String: The guest book entry (as text)
-     *         table[...]["Date"]    --> String: Date and time of the entry
+
      */
     public function getEntries()
     {
-
-        $sql = "SELECT * FROM myguests";
- 
-        $db_erg = mysqli_query( $this->db, $sql );
-        if ( ! $db_erg )
-        {
-        die('Ungültige Abfrage: ' . mysqli_error());
+        // Make querry
+        $result = mysqli_query($this->db, "SELECT * FROM guestbook");
+        
+        $table = false;
+        $i = 0;
+        while ($row = mysqli_fetch_array($result)) {
+            $table[$i]["Index"]   = $row["indes"];
+            $table[$i]["Name"]    = $row["name"];
+            $table[$i]["eMail"]   = $row["email"];
+            $table[$i]["Comment"] = $row["comment"];
+            $i++;
         }
         
-        echo '<table border="1">';
-        while ($zeile = mysqli_fetch_array($db_erg))
-        {
-        echo "<tr>";
-        echo "<td>". $zeile['firstname'] . "</td>";
-        echo "<td>". $zeile['email'] . "</td>";
-        echo "<td>". $zeile['comment'] . "</td>";
-        echo "</tr>";
-        }
-        echo "</table>";
+        mysqli_free_result($result);
         
-        mysqli_free_result( $db_erg );
+        return $table;
     }
     
     /**
@@ -81,15 +77,20 @@ class GuestbookAccess
      */
     function addEntry($name, $eMail, $comment)
     {   
+        // For security: supress SQL injection
+        $name    = mysqli_real_escape_string($this->db, $name);
+        $eMail   = mysqli_real_escape_string($this->db, $eMail);
+        $comment = mysqli_real_escape_string($this->db, $comment);
+        
         // Add entry to the database
-        $sql = "INSERT INTO `myguests` (`id`, `firstname`, `comment`, `email`) VALUES (NULL, '$name', '$comment', '$eMail')";
-
-        if ($this->db->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-
+        // WHY IS NAME BLUE ?? 
+        $result = mysqli_query($this->db, "INSERT INTO guestbook (name, email, comment) VALUES ('$name', '$eMail', '$comment')");
+        
+        if ($result)
+        {
+            $result = mysqli_insert_id($this->db);
+        } 
+        return $result;
     }
     
     /**
@@ -98,7 +99,6 @@ class GuestbookAccess
      *         list["Name"]    --> String: name of the user
      *         list["eMail"]   --> String: e-Mail of the user
      *         list["Comment"] --> String: The guest book entry (as text)
-     *         list["Date"]    --> String: Date and time of the entry
      */
     public function getEntry($index)
     {
@@ -106,23 +106,36 @@ class GuestbookAccess
         settype($index, 'Integer');
 
         // Make querry
-        $result = mysql_query("SELECT * FROM guestbook WHERE indes = '$index'");
+        $result = mysqli_query($this->db, "SELECT * FROM guestbook WHERE indes = '$index'");
         
         $list = false;
-        $row = mysql_fetch_array($result);
+        $row = mysqli_fetch_array($result);
         if ($row != false) {            
             $list["Index"]   = $row["indes"];
-            $list["Date"]    = $row["date"];
+
             $list["Name"]    = $row["name"];
             $list["eMail"]   = $row["email"];
             $list["Comment"] = $row["comment"];
         }
         
-        mysql_free_result($result);
+        mysqli_free_result($result);
         
         return $list;
     }
+        
+    /**
+     * Removes the entry with the given index from the database.
+     * @param Integer $index Index of the entry to remove
+     * @return Boolean true on success.
+     */
+    function removeEntry($index)
+    {
+        // For security: supress SQL injection
+        settype($index, 'Integer');
+        
+        $result = mysqli_query($this->db, "DELETE FROM guestbook WHERE indes = '$index'");
+        
+        return $result;
+    }
 }
-
 ?>
-

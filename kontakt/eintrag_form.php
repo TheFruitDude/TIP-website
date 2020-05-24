@@ -1,10 +1,13 @@
 <?php
-//
 //define variables and set them to empty values
+//checks if all the entries are valid
+
 $name_error = $email_error = $phone_error = $url_error = "";
 $name = $email = $phone = $message = $url = $success = "";
 
+require_once '../GuestbookAccess.php';
 //form is submitted with the post method:
+//so my understanding is this script gets activated as soon as the form is submittet in eintrag erstelllen
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["name"])) {
         $name_error = "Name is required";
@@ -24,54 +27,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email_error = "invalid email format";
         }
     }
-    if (empty($_POST["phone"])) {
-        $phone_error = "Phone is required";
-    } else {
-        $phone = test_input($_POST["phone"]);
-        if (!preg_match('/[0-9].*/',$phone)) {
-            $phone_error = "Phone Number seems to be invalid";
-        }
-    }
-    if (empty($_POST["url"])) {
-        $url_error = "";
-    } else {
-        $url = test_input($_POST["url"]);
-        //check if url is valid. (This regular expression allows dashes in the URL)
-        if (!preg_match("/^(https?:\/\/)?[0-9a-zA-Z]+\.[-_0-9a-zA-Z]+\.[0-9a-zA-Z]+$/i",$url)) {
-            $url_error = "URL invalid";
-        }
-    }
+
     if (empty($_POST["message"])) {
         $message = "";
     } else {
         $message = $_POST["message"];
     }
 
-
     if (empty($_POST["message"])) {
         $message = "";
     } else {
         $message = test_input($_POST["message"]);
     }
-    debug($message);
-    
+   
+
     $message_body = '';
-    if ($name_error == '' and $email_error == '' and $phone_error == '' and $url_error == '') {
+    if ($name_error == '' and $email_error == '') {
         
         unset($_POST['submit']);
+        //don't really know what this does, but it works:
         foreach ($_POST as $key => $value) {
             $message_body .= "$key: $value\n";
         }
         //$str = str_replace(array("\r", "\n"), '', $str);
         debug(str_replace(array("\r", "\n"), ' ', $message_body));
 
-        $to = 'anonymsir@gmail.com';
-        $subject = 'Contact From Website';
-        if (mail($to, $subject, $message_body)) {
-            $success = 'Message sent, thank you for contacting us.';
-            $name = $email = $phone = $message = $url = "";
-        }
+      // Everything is filled out. Now put the information in the database
+      // Create an object of the GuestbookAccess class
+      $guestbook = new GuestbookAccess();
+        
+      // Call the add entry methode
+      // The methode itself adds an unique index and the date to the entry.
+      $id1 = $guestbook->addEntry($name, $email, $message);
+    
+      debug("Added new entry with index $id1\n");
       
+
     }
 } //if $_SERVER["REQUEST_METHOD"] == "POST") endet hier
 
